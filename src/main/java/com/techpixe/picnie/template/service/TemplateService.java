@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.techpixe.picnie.template.Entity.Template;
 import com.techpixe.picnie.template.Entity.TextElement;
+import com.techpixe.picnie.template.dto.TemplateDto;
 
 public interface TemplateService {
 
@@ -14,5 +15,9 @@ public interface TemplateService {
 	List<Template> getAllTemplates();
 
 	String getById(long id);
+
+	//Template createTemplate(Template template);
+
+	Template createTemplate(TemplateDto templateDto);
 
 }

@@ -1,13 +1,18 @@
 package com.techpixe.picnie.template.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.techpixe.picnie.template.Entity.ImageElement;
 import com.techpixe.picnie.template.Entity.Template;
 import com.techpixe.picnie.template.Entity.TextElement;
+import com.techpixe.picnie.template.dto.ImageElementDTO;
+import com.techpixe.picnie.template.dto.TemplateDto;
+import com.techpixe.picnie.template.dto.TextElementDTO;
 import com.techpixe.picnie.template.repository.TemplateRepository;
 import com.techpixe.picnie.template.service.TemplateService;
 
@@ -24,7 +29,7 @@ public class TemplateServiceImpl implements TemplateService {
 	@Override
 	public Template createTemplateWithTextElements(Template template, List<TextElement> textElements) {
 		textElements.forEach(textElement -> textElement.setTemplate(template));
-
+        
 		// Set the text elements for the template
 		template.setTextElements(textElements);
 
@@ -60,6 +65,49 @@ public class TemplateServiceImpl implements TemplateService {
 	            return "No text elements found for the template.";
 	        }
 	        return "Template not found.";
+	}
+
+	@Override
+	public Template createTemplate(TemplateDto templateDto) {
+		 Template template = new Template();
+	        template.setTemplateName(templateDto.getTemplateName());
+	        template.setType(templateDto.getType());
+
+	        List<TextElement> textElements = new ArrayList<>();
+	        for (TextElementDTO textElementDTO : templateDto.getTextElements()) {
+	            TextElement textElement = new TextElement();
+	            textElement.setName(textElementDTO.getName());
+	            textElement.setText(textElementDTO.getText());
+	            textElement.setTextSize(textElementDTO.getTextSize());
+	            textElement.setFontStyle(textElementDTO.getFontStyle());
+	            textElement.setTextColor(textElementDTO.getTextColor());
+	            textElement.setAngle(textElementDTO.getAngle());
+	            textElement.setDestX(textElementDTO.getDestX());
+	            textElement.setDestY(textElementDTO.getDestY());
+	            textElement.setMaxLength(textElementDTO.getMaxLength());
+	            textElement.setMaxLines(textElementDTO.getMaxLines());
+	            textElement.setLetterSpacing(textElementDTO.getLetterSpacing());
+	            textElement.setInputLineHeight(textElementDTO.getInputLineHeight());
+	            textElement.setTextAlign(textElementDTO.getTextAlign());
+	            // Add the text element to the list
+	            textElements.add(textElement);
+	        }
+	        
+	        template.setTextElements(textElements);
+	        List<ImageElement> imageElements = new ArrayList<>();
+	        for (ImageElementDTO imageElementDTO : templateDto.getImageElements()) {
+	            ImageElement imageElement = new ImageElement();
+	            imageElement.setName(imageElementDTO.getName());
+	            imageElement.setImageUrl(imageElementDTO.getImageUrl());
+	            // Add the image element to the list
+	            imageElements.add(imageElement);
+	        }
+	        template.setImageElements(imageElements);
+
+	        // Similar process for image elements
+	        // You need to implement the logic for image elements accordingly
+
+	        return templateRepository.save(template);
 	}
 
 }

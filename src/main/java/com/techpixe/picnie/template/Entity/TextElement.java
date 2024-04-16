@@ -31,6 +31,7 @@ public class TextElement {
 	private Template template;
 	
 	private String name;
+	private String type;
 	private String text;
 	private int textSize;
 	private String fontStyle;

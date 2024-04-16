@@ -32,7 +32,7 @@ public class Template {
 	@OneToMany(mappedBy = "template", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<TextElement> textElements;
 
-//	@OneToMany(mappedBy = "template", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	private List<ImageElement> imageElements;
+	@OneToMany(mappedBy = "template", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<ImageElement> imageElements;
 
 }
