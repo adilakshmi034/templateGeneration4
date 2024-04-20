@@ -10,14 +10,20 @@ import com.techpixe.picnie.template.dto.TemplateDto;
 
 public interface TemplateService {
 
-	Template createTemplateWithTextElements(Template template, List<TextElement> textElements);
+	//Template createTemplate(Template template);
 
 	List<Template> getAllTemplates();
 
-	String getById(long id);
+//	String getById(long id);
 
-	//Template createTemplate(Template template);
+	Template createTemplate(String templateName, String type, String textElementName, String textElementType,
+			String textElementText, int textElementTextSize, String textElementFontStyle, String textElementTextColor,
+			int textElementAngle, int textElementDestX, int textElementDestY, int textElementMaxLength,
+			int textElementMaxLines, double textElementLetterSpacing, double textElementInputLineHeight,
+			String textElementTextAlign, String imageElementType, String imageElementName, MultipartFile imageElementImageUrl);
 
-	Template createTemplate(TemplateDto templateDto);
+	
+
+	// Template createTemplate(Template template);
 
 }

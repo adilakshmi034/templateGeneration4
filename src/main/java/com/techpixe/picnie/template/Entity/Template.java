@@ -2,6 +2,8 @@ package com.techpixe.picnie.template.Entity;
 
 import java.util.List;
 
+import com.techpixe.picnie.template.dto.TextElementDTO;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,10 +32,16 @@ public class Template {
 	@Column(name = "type")
 	private String type;
 
-	@OneToMany(mappedBy = "template", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<TextElement> textElements;
+//	@OneToMany(mappedBy = "template", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	private List<TextElement> textElements;
+//	
+//	@OneToMany(mappedBy = "template", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	private List<ImageElement> imageElements;
 
-	@OneToMany(mappedBy = "template", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<ImageElement> imageElements;
+   @OneToOne
+	private TextElement textElements;
+	
+	@OneToOne
+	private ImageElement imageElements;
 
 }
